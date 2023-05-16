@@ -2,11 +2,8 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
-    <title>Login</title>
+    <%- include('./partials/header'); %>
+        <title>Login</title>
 </head>
 
 <body>
@@ -17,12 +14,12 @@
         <div class="form-container">
             <div id="sub-container">
                 <h1 class="fs-3">Login</h1>
-                <p style="color: #04AA6D; text-align: center;">
-                    <!-- error msg -->
+                <p style="color: #f45034; text-align: center;">
+                    <%= message %>
                 </p>
                 <form onsubmit="return handleSubmit();" action="/login" method="post">
                     <div class="c-info">
-                        <label for="loginId">Login Id</label>
+                        <label for="loginId">Username</label>
                         <input type="text" name="loginId" id="loginId" placeholder="Email" autocomplete="off">
                     </div>
                     <div class="c-info">
@@ -33,18 +30,19 @@
                         <input type="submit" id="btn" value="Login" data-bs-toggle="modal">
                     </div>
                 </form>
-                <div style="text-align: center; margin-top: 20px;">
-                    <a style="text-decoration: none;" href="/collegesignup">Sign Up</a>
+                <div class="link" style="text-align: center; margin-top: 20px;">
+                    <a style="text-decoration: none;" href="/signup">Sign Up</a>
                 </div>
             </div>
         </div>
     </div>
-    <script>
-        // const btn = document.getElementById('btn');
-        // const inp = document.getElementById("loginId");
-        // const pass = document.getElementById("password");
-        // const msg = document.querySelector(".modal-body");
+    <%- include('./partials/footer'); %>
+        <script>
+            const btn = document.getElementById('btn');
+            const inp = document.getElementById("loginId");
+            const pass = document.getElementById("password");
+            const msg = document.querySelector(".modal-body");
 
-    </script>
+        </script>
 
 </html>

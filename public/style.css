@@ -5,8 +5,24 @@
 }
 
 body {
-    background-image: repeating-linear-gradient(90deg, #eee, #eee);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #eee;
+}
 
+.form-container {
+    display: flex;
+    justify-content: center;
+}
+
+#sub-container {
+    margin: 50px auto auto auto;
+    min-width: 700px;
+    padding: 40px 50px;
+    background: #fff;
+    border-radius: 7px;
+    box-shadow: 0 2px 5px #ccc;
 }
 
 h1 {
@@ -18,6 +34,7 @@ h1 {
 input[type=text],
 input[type=password] {
 
+    margin: 5px 0px;
     border: 1px solid #B7C4CF;
     border-radius: 5px;
     text-align: left;
@@ -25,45 +42,6 @@ input[type=password] {
     padding: 10px;
     font-size: 18px;
     width: 100%;
-}
-
-input[type=text]:focus,
-input[type=password]:focus {
-    border-color: #063860;
-}
-
-::placeholder {
-    color: #04AA6D;
-    opacity: 0.4;
-    text-transform: capitalize;
-}
-
-.form-container {
-    display: flex;
-    justify-content: center;
-}
-
-/* ============================= signup */
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
-body {
-    background-image: repeating-linear-gradient(90deg, #eee, #eee);
-
-}
-
-h1 {
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-::placeholder {
-    color: #04AA6D;
-    opacity: 0.4;
 }
 
 input[type=text]:focus,
@@ -86,46 +64,173 @@ input[type=submit]:hover {
     background-color: #039560;
 }
 
-.form-container {
-    display: flex;
-    justify-content: center;
+::placeholder {
+    color: #04AA6D;
+    opacity: 0.4;
 }
 
-#sub-container {
-    margin: 50px auto auto auto;
-    width: 50%;
-    padding: 40px 50px;
-    background: #fff;
-    border-radius: 7px;
-    box-shadow: 0 2px 5px #ccc;
+@media (max-width: 718px) {
+    #sub-container {
+        min-width: 95% !important;
+    }
 }
 
 .c-info {
     margin-top: 10px;
 }
 
-a {
+.link>a {
     text-decoration: none;
     padding: 10px 20px;
     margin: 5px;
     border-radius: 3px;
 }
 
-a:hover {
+.link>a:hover {
     opacity: 0.8;
 }
 
-.l1 {
-    background-color: #063860;
-    color: #eee;
+
+/* footer start */
+.footer {
+    margin-top: auto !important;
+    width: 100%;
+    text-align: center;
 }
 
-.l2 {
-    background-color: #d14747;
-    color: #eee;
+
+.coypRight {
+    background: white;
+    color: #25426be3;
+    padding-bottom: 20px;
 }
 
-.l3 {
-    background-color: #8a0a0a;
-    color: #eee;
+#footer-para {
+    padding: 10px 0px;
 }
+
+.fa-copyright {
+    font-size: 12px;
+}
+
+.social-container {
+    color: #25426be3;
+    background: white;
+    width: 100%;
+    padding-bottom: 10px;
+}
+
+/*  social icon start */
+.social-icon {
+    list-style-type: none;
+}
+
+.social-icon {
+    text-decoration: none;
+    position: relative;
+}
+
+.social-icon:before {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-transform: none !important;
+}
+
+.social-icon.circle {
+    -moz-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    border: 0;
+    border-radius: 100%;
+    display: inline-block;
+    font-size: 1.5em;
+    height: 2.25em;
+    left: 0;
+    line-height: 2.25em;
+    text-align: center;
+    text-decoration: none;
+    top: 0;
+    width: 2.25em;
+}
+
+.social-icon.circle:hover {
+    top: -0.2em;
+}
+
+.social-icon.circle.fa-twitter {
+    background: #55ACEE;
+    color: #fff;
+}
+
+.social-icon.circle.fa-twitter:hover {
+    background: #6baaca;
+}
+
+.social-icon.circle.fa-facebook {
+    background: #3B5998;
+    color: #fff;
+}
+
+.social-icon.circle.fa-facebook:hover {
+    background: #6e8bc1;
+}
+
+.social-icon.circle.fa-instagram {
+
+    background: radial-gradient(circle farthest-corner at 35% 90%, #fec564, transparent 50%), radial-gradient(circle farthest-corner at 0 140%, #fec564, transparent 50%), radial-gradient(ellipse farthest-corner at 0 -25%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 20% -50%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 0, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 60% -20%, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, transparent), linear-gradient(#6559ca, #bc318f 30%, #e33f5f 50%, #f77638 70%, #fec66d 100%);
+    color: #fff;
+}
+
+.social-icon.circle.fa-instagram:hover {
+    background: radial-gradient(circle farthest-corner at 35% 90%, #f3cf92, transparent 50%), radial-gradient(circle farthest-corner at 0 140%, #f3cf92, transparent 50%), radial-gradient(ellipse farthest-corner at 0 -25%, #777df4, transparent 50%), radial-gradient(ellipse farthest-corner at 20% -50%, #777df4, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 0, #c179f7, transparent 50%), radial-gradient(ellipse farthest-corner at 60% -20%, #c179f7, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, transparent), linear-gradient(#777df4, #f460c5 30%, #f66884 50%, #f89568 70%, #f3cf92 100%);
+    color: #fff;
+}
+
+.social-icon.circle.fa-linkedin {
+    background: #007bb5;
+    color: #fff;
+}
+
+
+.social-icon.circle.fa-linkedin:hover {
+    background: #5391ae;
+}
+
+.social-icon.circle.fa-github {
+    background: #dcad8b;
+    color: #fff;
+}
+
+.social-icon.circle.fa-github:hover {
+    background: #e1b89b;
+}
+
+
+.social-icon.featured {
+    cursor: default;
+    display: block;
+    margin: 0 0 1.5em 0;
+    opacity: 0.35;
+    text-align: center;
+}
+
+.social-icon.featured:before {
+    font-size: 5em;
+    line-height: 1em;
+}
+
+/* .icon.circle {
+        font-size: 1.5em;
+    } */
+
+.social-icon>.label {
+    display: none;
+}
+
+/*  social icon end */
+
+/* footer end */

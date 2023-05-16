@@ -2,11 +2,8 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
-    <title>Signup</title>
+    <%- include('./partials/header'); %>
+        <title>Signup</title>
 </head>
 
 <body>
@@ -40,27 +37,12 @@
                         <input type="submit" id="btn" value="Sign Up" data-bs-toggle="modal">
                     </div>
                 </form>
-                <div style="text-align: center; margin-top: 20px;">
+                <div class="link" style="text-align: center; margin-top: 20px;">
                     <a style="text-decoration: none;" href="/">Login</a>
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="login" data-bs-backdrop="static" tabindex="-1" aria-labelledby="loginLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-sm">
-                <div class="modal-content">
-                    <div class="modal-header bg-danger" style="height:40px; color: white;">
-                        <h5 class="modal-title fs-5 " id="exampleModalLabel">warning!</h5>
-                        <button onclick="handleClick()" type="button" class="btn-close shadow-none"
-                            data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body text-danger">
-
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
-
+    <%- include('./partials/footer'); %>
 
 </html>

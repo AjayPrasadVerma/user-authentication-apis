@@ -27,8 +27,13 @@ app.use(session({
     saveUninitialized: false
 }));
 
+app.use((req, res, next) => {
+    res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+    next();
+});
+
 app.get("/", (req, res) => {
-    res.render("Login");
+    res.render("Login", { message: req.session.logMsg });
 });
 
 app.get("/signup", (req, res) => {
@@ -36,13 +41,24 @@ app.get("/signup", (req, res) => {
     res.render("SignUp", { message: req.session.sigMessage });
 })
 
-app.get("/user", auth, async (req, res) => {
+app.get("/userform", auth, (req, res) => {
+
+    if (req.user) {
+        res.render("UserForm");
+    }
+    else {
+        res.redirect("/");
+    }
+
+})
+
+app.get("/user", auth, (req, res) => {
 
     if (req.user) {
         res.render("UserDetails");
     }
     else {
-        res.redirect("Login");
+        res.redirect("/");
     }
 
 });
@@ -84,27 +100,32 @@ app.post("/login", async (req, res) => {
     const Username = req.body.loginId;
     const password = req.body.password;
 
-    const foundData = await userModal.findOne({ username: Username });
+    try {
+        const foundData = await userModal.findOne({ username: Username });
 
-    if (foundData) {
-        const isMatch = await bcrypt.compare(password, foundData.password);
+        if (foundData) {
+            const isMatch = await bcrypt.compare(password, foundData.password);
 
-        const token = await foundData.generateAuthToken();
+            const token = await foundData.generateAuthToken();
 
-        res.cookie("jwt", token, { maxAge: 10 * 60 * 1000 });  // 10min
+            res.cookie("jwt", token, { maxAge: 30 * 60 * 1000 });
 
-
-        if (isMatch) {
-            res.render('UserForm');
+            if (isMatch) {
+                res.redirect("/userform");
+            } else {
+                req.session.logMsg = "Incorrect Password!";
+                res.redirect("/");
+            }
         } else {
-            console.log("Incorrect Password");
+            req.session.logMsg = "user does not exists!";
             res.redirect("/");
         }
-    } else {
-        console.log("user not exists..");
+    } catch (err) {
+        res.status(400).send(err);
     }
 
 })
+
 
 app.post("/signup", async (req, res) => {
 
@@ -116,22 +137,33 @@ app.post("/signup", async (req, res) => {
         password: newPassword
     })
 
-    const foundUser = await userModal.find({ username: newUsername });
+    try {
 
+        const foundUser = await userModal.find({ username: newUsername });
 
-    const token = await newUser.generateAuthToken();
+        if (!foundUser) {
+            const token = await newUser.generateAuthToken();
 
-    res.cookie("jwt", token, { expires: new Date(Date.now() + 60000), httpOnly: true }); // 60sec
+            res.cookie("jwt", token, { expires: new Date(Date.now() + 60000), httpOnly: true }); // 60sec
 
-    await newUser.save()
-        .then(() => {
-            // console.log("Successfully added........");
-            req.session.sigMessage = "Successfully Signup please login!";
+            await newUser.save()
+                .then(() => {
+                    // console.log("Successfully added........");
+                    req.session.sigMessage = "Successfully Signup please login!";
+                    res.redirect("/signup");
+                }).catch((err) => {
+                    console.log(err);
+                    res.redirect("/signup");
+                })
+        }
+        else {
+            req.session.sigMessage = "User Already Exist!";
             res.redirect("/signup");
-        }).catch((err) => {
-            console.log(err);
-            res.redirect("/signup");
-        })
+        }
+
+    } catch (err) {
+        res.status(400).send(err);
+    }
 
 })
 
