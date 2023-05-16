@@ -2,18 +2,23 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
-    <title>Document</title>
+    <%- include('./partials/header'); %>
 </head>
 
 <body>
-    <h1 style="background-color: #039560; padding: 20px;">Login Success</h1>
-    <a class="l1" href="/user">Verified Page</a>
-    <a class="l2" href="/logout">Logout</a>
-    <a class="l3" href="/logoutAll">Logout from all device</a>
+    <div class="header">
+        <h1>New Users</h1>
+    </div>
+    <div class="link">
+        <a class="l1" href="/user">Verified Page</a>
+        <a class="l2" href="/logout">Logout</a>
+        <a class="l3" href="/logoutAll">Logout from all device</a>
+    </div>
+    <div class="form-container">
+        <div id="sub-container" style="margin-top: 25px;">
+            <%- include('./partials/form'); %>
+        </div>
+    </div>
 </body>
 
 </html>

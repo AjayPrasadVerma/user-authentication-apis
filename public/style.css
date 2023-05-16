@@ -4,6 +4,13 @@
     box-sizing: border-box;
 }
 
+:root {
+    --dark: #2b2d42;
+    --light: #adb5db;
+    --border: #dee2e6;
+    --border-btn: #edf2f4;
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -31,7 +38,17 @@ h1 {
     margin-bottom: 20px;
 }
 
+.header {
+    background-color: #039560;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
 input[type=text],
+input[type=number],
 input[type=password] {
 
     margin: 5px 0px;
@@ -44,8 +61,20 @@ input[type=password] {
     width: 100%;
 }
 
+.pincode {
+    max-width: 280px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 input[type=text]:focus,
+input[type=number]:focus,
 input[type=password]:focus {
+    outline: none;
     border-color: #063860;
 }
 
@@ -63,6 +92,12 @@ input[type=submit] {
 input[type=submit]:hover {
     background-color: #039560;
 }
+
+input[type=password].invalid,
+input[type=text].invalid {
+    border: 1px solid #d13434;
+}
+
 
 ::placeholder {
     color: #04AA6D;
@@ -90,8 +125,116 @@ input[type=submit]:hover {
     opacity: 0.8;
 }
 
+a:hover {
+    opacity: 0.8;
+}
 
-/* footer start */
+/*  add user and update user */
+
+.form-title {
+    margin-top: 2em;
+    text-align: center;
+}
+
+
+
+#update_user .form-group,
+#add-user .form-group {
+    margin: .4em 0;
+}
+
+#update_user .form-group input[type="radio"],
+#add-user .form-group input[type="radio"] {
+    margin: 1em 2em;
+}
+
+.radio-group-container,
+.inp-group-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media (max-width: 456px) {
+    .inp-group-container {
+        display: block;
+    }
+
+    .radio-group-container {
+        justify-content: space-between !important;
+    }
+
+    .district {
+        margin-left: 0px !important;
+    }
+
+    .pincode {
+        max-width: 100%;
+    }
+}
+
+.radio input[type='radio'] {
+
+    position: absolute;
+    opacity: 0;
+}
+
+.radio {
+    margin: 5px 0px;
+}
+
+.radio input[type='radio']+.radio-label:before {
+    content: "";
+    background: var(--border-btn);
+    border-radius: 100%;
+    border: 1px solid var(--dark);
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    position: relative;
+    top: -0em;
+    margin-right: .5em;
+    vertical-align: top;
+    cursor: pointer;
+    text-align: center;
+    -webkit-transition: all 250ms ease;
+    transition: all 250ms ease;
+}
+
+.radio input[type='radio']:checked+.radio-label:before {
+    background-color: #16db93;
+    box-shadow: inset 0 0 0 4px #e9ecef;
+}
+
+.radio input[type='radio']:focus+.radio-label:before {
+    outline: none;
+    border-color: #16db93;
+}
+
+.radio input[type='radio']:disabled+.radio-label:before {
+    box-shadow: inset 0 0 0 4px #e9ecef;
+    border-color: #b4b4b4;
+    background: #b4b4b4;
+}
+
+#update_user .form-group .btn,
+#add-user .form-group .btn {
+    width: 100%;
+    padding: .9em 1em;
+    background-color: #16db93;
+    border: none;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: .2em;
+    margin: .5em 0;
+}
+
+#update_user .form-group .btn:hover,
+#add-user .form-group .btn:hover {
+    background-color: var(--dark);
+    color: var(--border);
+}
+
+/* User  */
 .footer {
     margin-top: auto !important;
     width: 100%;
@@ -106,6 +249,7 @@ input[type=submit]:hover {
 }
 
 #footer-para {
+    margin-top: 10px;
     padding: 10px 0px;
 }
 
@@ -234,3 +378,18 @@ input[type=submit]:hover {
 /*  social icon end */
 
 /* footer end */
+
+.l1 {
+    background-color: #063860;
+    color: #eee;
+}
+
+.l2 {
+    background-color: #d14747;
+    color: #eee;
+}
+
+.l3 {
+    background-color: #8a0a0a;
+    color: #eee;
+}

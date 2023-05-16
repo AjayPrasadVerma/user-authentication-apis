@@ -7,10 +7,6 @@
 </head>
 
 <body>
-    <style>
-
-    </style>
-
     <div>
         <div class="form-container">
             <div id="sub-container">
@@ -19,22 +15,25 @@
                     <p style="color: #04AA6D; text-align: center;">
                         <%= message %>
                     </p>
+                    <span id="err" style="color: #d13434; text-align: center; display: block;"></span>
                     <div class="c-info">
                         <label class="required" for="username">Username</label>
-                        <input type="text" name="username" id="loginId" placeholder="Email" autocomplete="off">
+                        <input type="text" name="username" id="username" placeholder="Email"
+                            oninput="this.className='' " autocomplete="off">
                     </div>
                     <div class="c-info">
                         <label class="required" for="password">Password</label>
-                        <input type="password" name="password" id="password" placeholder="password" autocomplete="off">
+                        <input type="password" name="password" id="password" placeholder="password"
+                            oninput="this.className='' " autocomplete="off">
                     </div>
 
                     <div class="c-info">
                         <label class="required" for="cpassword">Confirm Pasword</label>
-                        <input type="password" name="cpassword" id="cpassword" placeholder="Confirm password"
-                            autocomplete="off">
+                        <input type="password" name="cpassword" id="cpassword" oninput="this.className='' "
+                            placeholder="Confirm password" autocomplete="off">
                     </div>
                     <div style="text-align: center;">
-                        <input type="submit" id="btn" value="Sign Up" data-bs-toggle="modal">
+                        <input type="submit" id="btn" value="Sign Up">
                     </div>
                 </form>
                 <div class="link" style="text-align: center; margin-top: 20px;">
@@ -44,5 +43,6 @@
         </div>
     </div>
     <%- include('./partials/footer'); %>
+        <script src="/signup.js"></script>
 
 </html>

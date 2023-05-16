@@ -41,7 +41,7 @@ app.get("/signup", (req, res) => {
     res.render("SignUp", { message: req.session.sigMessage });
 })
 
-app.get("/userform", auth, (req, res) => {
+app.get("/adduser", auth, (req, res) => {
 
     if (req.user) {
         res.render("UserForm");
@@ -72,7 +72,6 @@ app.get("/logout", auth, async (req, res) => {
         })
 
         res.clearCookie("jwt")
-        console.log("logout Successfully");
         await req.user.save();
         res.redirect("/");
     } catch (err) {
@@ -86,7 +85,6 @@ app.get("/logoutAll", auth, async (req, res) => {
         req.user.tokens = [];
 
         res.clearCookie("jwt")
-        console.log("logout Successfully");
         await req.user.save();
         res.redirect("/");
     } catch (err) {
@@ -111,7 +109,7 @@ app.post("/login", async (req, res) => {
             res.cookie("jwt", token, { maxAge: 30 * 60 * 1000 });
 
             if (isMatch) {
-                res.redirect("/userform");
+                res.redirect("/adduser");
             } else {
                 req.session.logMsg = "Incorrect Password!";
                 res.redirect("/");
@@ -141,7 +139,7 @@ app.post("/signup", async (req, res) => {
 
         const foundUser = await userModal.find({ username: newUsername });
 
-        if (!foundUser) {
+        if (foundUser.length === 0) {
             const token = await newUser.generateAuthToken();
 
             res.cookie("jwt", token, { expires: new Date(Date.now() + 60000), httpOnly: true }); // 60sec

@@ -14,20 +14,22 @@
         <div class="form-container">
             <div id="sub-container">
                 <h1 class="fs-3">Login</h1>
-                <p style="color: #f45034; text-align: center;">
+                <p id="err" style="color: #f45034; text-align: center;">
                     <%= message %>
                 </p>
                 <form onsubmit="return handleSubmit();" action="/login" method="post">
                     <div class="c-info">
-                        <label for="loginId">Username</label>
-                        <input type="text" name="loginId" id="loginId" placeholder="Email" autocomplete="off">
+                        <label for="Username">Username</label>
+                        <input type="text" name="loginId" id="username" placeholder="Email" oninput="this.className='' "
+                            autocomplete="off">
                     </div>
                     <div class="c-info">
                         <label for="password">Password</label>
-                        <input type="password" name="password" id="password" placeholder="password" autocomplete="off">
+                        <input type="password" name="password" id="password" placeholder="password"
+                            oninput="this.className='' " autocomplete="off">
                     </div>
                     <div style="text-align: center;">
-                        <input type="submit" id="btn" value="Login" data-bs-toggle="modal">
+                        <input type="submit" id="btn" value="Login">
                     </div>
                 </form>
                 <div class="link" style="text-align: center; margin-top: 20px;">
@@ -37,12 +39,32 @@
         </div>
     </div>
     <%- include('./partials/footer'); %>
-        <script>
-            const btn = document.getElementById('btn');
-            const inp = document.getElementById("loginId");
-            const pass = document.getElementById("password");
-            const msg = document.querySelector(".modal-body");
 
+        <script>
+            function handleSubmit() {
+                return validate()
+            }
+
+            function validate() {
+
+                let valid = true;
+
+                const err = document.getElementById("err");
+                const inp = document.getElementsByTagName('input');
+
+                for (i = 0; i < inp.length; i++) {
+
+                    if (inp[i].value == "") {
+                        inp[i].className += " invalid";
+                        err.innerText = "All field required!";
+                        valid = false;
+                    }
+                }
+
+
+                return (valid) ? true : false;
+
+            }
         </script>
 
 </html>

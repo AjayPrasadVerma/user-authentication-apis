@@ -5,8 +5,7 @@ const bcrypt = require('bcryptjs');
 const userSchema = mongoose.Schema({
     username: {
         type: String,
-        requird: true,
-        unique: true
+        requird: true
     },
     password: String,
     tokens: [{
@@ -20,9 +19,6 @@ const userSchema = mongoose.Schema({
 // generating tokens
 userSchema.methods.generateAuthToken = async function () {
     try {
-
-        console.log(this.username);
-
         const newToken = await jwt.sign({ _id: this._id.toString() }, process.env.SECRET_KEY);
         this.tokens = this.tokens.concat({ token: newToken });
         await this.save();
