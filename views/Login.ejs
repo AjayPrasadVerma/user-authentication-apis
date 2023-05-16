@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Login</title>
+</head>
+
+<body>
+    <style>
+
+    </style>
+    <div>
+        <div class="form-container">
+            <div id="sub-container">
+                <h1 class="fs-3">Login</h1>
+                <p style="color: #04AA6D; text-align: center;">
+                    <!-- error msg -->
+                </p>
+                <form onsubmit="return handleSubmit();" action="/login" method="post">
+                    <div class="c-info">
+                        <label for="loginId">Login Id</label>
+                        <input type="text" name="loginId" id="loginId" placeholder="Email" autocomplete="off">
+                    </div>
+                    <div class="c-info">
+                        <label for="password">Password</label>
+                        <input type="password" name="password" id="password" placeholder="password" autocomplete="off">
+                    </div>
+                    <div style="text-align: center;">
+                        <input type="submit" id="btn" value="Login" data-bs-toggle="modal">
+                    </div>
+                </form>
+                <div style="text-align: center; margin-top: 20px;">
+                    <a style="text-decoration: none;" href="/collegesignup">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // const btn = document.getElementById('btn');
+        // const inp = document.getElementById("loginId");
+        // const pass = document.getElementById("password");
+        // const msg = document.querySelector(".modal-body");
+
+    </script>
+
+</html>
