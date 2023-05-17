@@ -67,6 +67,19 @@ app.get("/user", auth, async (req, res) => {
 
 });
 
+app.get("/update", auth, async (req, res) => {
+
+    const userDetail = await addUserModel.findOne({ email: req.session.currentUser });
+
+    if (req.user) {
+        res.render("UpdateDetails", { user: userDetail });
+    }
+    else {
+        res.redirect("/");
+    }
+
+});
+
 app.get("/logout", auth, async (req, res) => {
 
     try {
@@ -104,6 +117,7 @@ app.post("/login", async (req, res) => {
 
     try {
         const foundData = await userModal.findOne({ username: Username });
+        const userDetail = await addUserModel.findOne({ email: req.body.username });
 
         if (foundData) {
             const isMatch = await bcrypt.compare(password, foundData.password);
@@ -114,7 +128,11 @@ app.post("/login", async (req, res) => {
 
             if (isMatch) {
                 req.session.currentUser = foundData.username;
-                res.redirect("/adduser");
+                if (userDetail) {
+                    res.redirect("/user");
+                } else {
+                    res.redirect("/adduser");
+                }
             } else {
                 req.session.logMsg = "Incorrect Password!";
                 res.redirect("/");
@@ -193,6 +211,29 @@ app.post("/api/user", async (req, res) => {
     }
 })
 
+app.post("/api/user/update/:id", async (req, res) => {
+
+    const id = req.params.id;
+
+    try {
+        const updatedUser = await addUserModel.findByIdAndUpdate(id, { $set: req.body }, { new: true });
+        res.redirect("/user");
+    }
+    catch (err) {
+        res.status(500).send(err);
+    }
+});
+
+app.post("/api/user/delete", async (req, res) => {
+
+    try {
+        const removedDocument = await addUserModel.findByIdAndRemove(req.body.deluser);
+        res.redirect("/");
+    } catch (err) {
+        res.status(500).send(err);
+    }
+
+})
 
 app.listen(port, () => {
     console.log(`we are listening at port number ${port}`);

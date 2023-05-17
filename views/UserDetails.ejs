@@ -50,12 +50,25 @@
                 </p>
             </div>
             <div style="text-align: center;">
-                <button class="btn1 btn btn-info">Edit</button>
-                <button class="btn1 btn btn-danger">Delete</button>
+                <a href="/update" class="btn1 btn btn-info" role="button">Edit</a>
+                <form onsubmit=" return deleteSubmit()" action="/api/user/delete" method="post"
+                    style="display: inline-block;">
+                    <input type="hidden" name="deluser" value="<%= user._id %>">
+                    <button type="submit" class="btn1 btn btn-danger">Delete</button>&nbsp;
+                </form>
             </div>
         </div>
     </div>
-
+    <script>
+        function deleteSubmit() {
+            if (confirm("Do you really want to delete this record?")) {
+                alert("Record Deleted successfully!\nPlease Login again!");
+                return true;
+            } else {
+                return false
+            }
+        }
+    </script>
 </body>
 
 </html>

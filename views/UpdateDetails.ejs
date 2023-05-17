@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/header'); %>
+</head>
+
+<body>
+    <div class="header">
+        <h1>Update User</h1>
+    </div>
+    <div class="form-container">
+        <div id="sub-container" style="margin-top: 10px;">
+            <form onsubmit="return handleSubmitEvent()" id="add-user" action="/api/user/update/<%= user._id %>"
+                method="post">
+                <div class="form-group">
+                    <label for="name" class="test-light">Name</label>
+                    <input type="text" name="name" value="<%= user.name %>" oninput="this.className='' ">
+                </div>
+                <div class="form-group">
+                    <label for="email" class="test-light">Email</label>
+                    <input type="text" name="userEmail" value="<%= user.email %>" disabled>
+                    <input type="hidden" name="email" value="<%= user.email %>">
+                </div>
+                <div class="form-group">
+                    <label for="mobile" class="test-light">Mobile No</label>
+                    <input type="number" inputmode="numeric" name="mobile" value="<%= user.mobile_no %>"
+                        oninput="this.className='' ">
+                </div>
+                <div class="form-group">
+                    <label for="address" class="test-light">Address</label>
+                    <input type="text" name="address" value="<%= user.address %>" oninput="this.className='' ">
+                </div>
+                <div class="inp-group-container">
+                    <div class="form-group">
+                        <label for="district" class="test-light">District</label>
+                        <input type="text" name="district" value="<%= user.district %>" oninput="this.className='' ">
+                    </div>
+                    <div class="form-group state" style="margin-left: 10px;">
+                        <label for="state" class="test-light ">State</label>
+                        <input type="text" name="state" value="<%= user.state %>" oninput="this.className='' ">
+                    </div>
+                </div>
+                <div class="inp-group-container">
+                    <div class="form-group pincode">
+                        <label for="pincode" class="test-light">Pin Code</label>
+                        <input type="number" inputmode="numeric" name="pincode" value="<%= user.pincode %>">
+                    </div>
+                    <div style="min-width: 48%; margin-left: 10px; justify-content: space-around;"
+                        class="radio-group-container">
+                        <div class="form-group">
+                            <label for="gender" class="test-light" oninput="this.className='' ">Gender</label>
+                            <div class="radio inline">
+                                <input type="radio" name="gender" id="radio-2" value="Male" <%=user.gender=='Male'
+                                    ?'checked':'' %>>
+                                <label for="radio-2" class="radio-label">Male</label>
+                            </div>
+                            <div class="radio inline">
+                                <input type="radio" name="gender" id="radio-3" value="Female"
+                                    oninput="this.className='' " <%=user.gender=='Female' ?'checked':'' %>>
+                                <label for="radio-3" class="radio-label">Female</label>
+                            </div>
+
+                        </div>
+                        <div class="form-group" style="margin-left: 25px;">
+                            <label for="status" class="test-light" oninput="this.className='' ">Status</label>
+
+                            <div class="radio inline">
+                                <input type="radio" name="status" id="radio-4" value="Active" <%=user.status=='Active'
+                                    ?'checked':'' %>>
+                                <label for="radio-4" class="radio-label">Active</label>
+                            </div>
+                            <div class="radio inline">
+                                <input type="radio" name="status" id="radio-5" value="Inactive"
+                                    oninput="this.className='' " <%=user.status=='Inactive' ?'checked':'' %>>
+                                <label for="radio-5" class="radio-label">Inactive</label>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn test-dark update">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function handleSubmitEvent() {
+
+            if (validate()) {
+                if (confirm("Please Verify details before submit")) {
+                    alert("Your application has been updated successfully!");
+                    return true;
+                }
+            }
+            else {
+                return false;
+            }
+        }
+
+        function validate() {
+
+            let valid = true;
+
+            const inp = document.getElementsByTagName('input');
+            const radiobtn = document.getElementsByClassName('test-light');
+
+            for (i = 0; i < inp.length; i++) {
+
+                if (inp[i].value == "") {
+                    inp[i].className += " invalid";
+                    valid = false;
+                }
+            }
+
+            return (valid) ? true : false;
+
+        }
+    </script>
+</body>
+
+</html>
