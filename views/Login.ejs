@@ -20,8 +20,8 @@
                 <form onsubmit="return handleSubmit();" action="/login" method="post">
                     <div class="c-info">
                         <label for="Username">Username</label>
-                        <input type="text" name="loginId" id="username" placeholder="Email" oninput="this.className='' "
-                            autocomplete="off">
+                        <input type="text" name="username" id="username" placeholder="Email"
+                            oninput="this.className='' " autocomplete="off">
                     </div>
                     <div class="c-info">
                         <label for="password">Password</label>
@@ -60,8 +60,6 @@
                         valid = false;
                     }
                 }
-
-
                 return (valid) ? true : false;
 
             }

@@ -5,7 +5,8 @@ const bodyParser = require('body-parser');
 const connectBD = require('./models/config');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const userModal = require("./models/userModel")
+const userModal = require("./models/userModel");
+const addUserModel = require("./models/addUserModel");
 const bcrypt = require('bcryptjs');
 const auth = require("./middleware/auth");
 const path = require('path');
@@ -41,10 +42,11 @@ app.get("/signup", (req, res) => {
     res.render("SignUp", { message: req.session.sigMessage });
 })
 
-app.get("/adduser", auth, (req, res) => {
+app.get("/adduser", auth, async (req, res) => {
 
     if (req.user) {
-        res.render("UserForm");
+
+        res.render("UserForm", { email: req.session.currentUser });
     }
     else {
         res.redirect("/");
@@ -52,10 +54,12 @@ app.get("/adduser", auth, (req, res) => {
 
 })
 
-app.get("/user", auth, (req, res) => {
+app.get("/user", auth, async (req, res) => {
+
+    const userDetail = await addUserModel.findOne({ email: req.session.currentUser });
 
     if (req.user) {
-        res.render("UserDetails");
+        res.render("UserDetails", { user: userDetail });
     }
     else {
         res.redirect("/");
@@ -95,7 +99,7 @@ app.get("/logoutAll", auth, async (req, res) => {
 
 app.post("/login", async (req, res) => {
 
-    const Username = req.body.loginId;
+    const Username = req.body.username;
     const password = req.body.password;
 
     try {
@@ -109,6 +113,7 @@ app.post("/login", async (req, res) => {
             res.cookie("jwt", token, { maxAge: 30 * 60 * 1000 });
 
             if (isMatch) {
+                req.session.currentUser = foundData.username;
                 res.redirect("/adduser");
             } else {
                 req.session.logMsg = "Incorrect Password!";
@@ -163,6 +168,29 @@ app.post("/signup", async (req, res) => {
         res.status(400).send(err);
     }
 
+})
+
+app.post("/api/user", async (req, res) => {
+
+    const userDetails = new addUserModel({
+        name: req.body.name,
+        email: req.body.email,
+        mobile_no: req.body.mobile,
+        gender: req.body.gender,
+        status: req.body.status,
+        address: req.body.address,
+        district: req.body.district,
+        state: req.body.state,
+        pincode: req.body.pincode,
+    });
+
+    try {
+        await userDetails.save();
+        res.redirect("/user");
+
+    } catch (err) {
+        res.status(400).send(err);
+    }
 })
 
 

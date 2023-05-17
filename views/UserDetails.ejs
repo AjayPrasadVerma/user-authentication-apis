@@ -7,23 +7,55 @@
 </head>
 
 <body>
-    <h1 style="background-color: #ed9b2f; padding: 20px;">you are verified</h1>
+    <h1 style="background-color: #ed9b2f; padding: 20px;">User Details</h1>
 
-    <div class="form-container">
-        <div id="sub-container" style="">
-
-            <div class="user-img">
-                <img src="https://ajayprasadverma.github.io/ajay/images/me-dev.svg" alt="user"
-                    style="width: 150px; height: 150px; user-select: none;" draggable="false">
-
-            </div>
-
-        </div>
-    </div>
-    <div class="link">
+    <div class="link link-btn">
         <a class="l2" href="/logout">Logout</a>
         <a class="l3" href="/logoutAll">Logout from all device</a>
     </div>
+
+    <div class="form-container">
+        <div id="sub-container" style="margin-top: 0px;">
+            <div class="user-img">
+                <img src="https://ajayprasadverma.github.io/ajay/images/me-dev.svg" alt="user"
+                    style="width: 150px; height: 150px; user-select: none;" draggable="false">
+            </div>
+            <div class="info-container">
+                <p class="info text-success"> <span class="info-title text-primary">Name : </span>
+                    <%= user.name %>
+                </p>
+                <p class="info text-success"> <span class="info-title text-primary">Email : </span>
+                    <%= user.email %>
+                </p>
+                <p class="info text-success"> <span class="info-title text-primary">Mobile No : </span>
+                    <%= user.mobile_no %>
+                </p>
+                <p class="info text-success"> <span class="info-title text-primary">Status : </span>
+                    <%= user.status %>
+                </p>
+                <p class="info text-success"> <span class="info-title text-primary">Gender : </span>
+                    <%= user.gender %>
+                </p>
+                <p class="info text-success"> <span class="info-title text-primary">Address : </span>
+                    <%= user.address %>
+                </p>
+                <p class="info text-success"> <span class="info-title text-primary">District : </span>
+                    <%= user.district %>
+                </p>
+                <p class="info text-success"> <span class="info-title text-primary">State : </span>
+                    <%= user.state %>
+                </p>
+                <p class="info text-success"> <span class="info-title text-primary">Pin Code : </span>
+                    <%= user.pincode %>
+                </p>
+            </div>
+            <div style="text-align: center;">
+                <button class="btn1 btn btn-info">Edit</button>
+                <button class="btn1 btn btn-danger">Delete</button>
+            </div>
+        </div>
+    </div>
+
 </body>
 
 </html>
